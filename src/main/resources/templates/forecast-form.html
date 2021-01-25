@@ -1,0 +1,87 @@
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Travel Forecast</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="row">
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ">
+                <form action="#" th:action="@{/forecast-form}" th:object="${travelInfo}" method="post">
+                <div class="form-group">
+                    <label for="inputCity">City</label>
+                    <select  th:field="*{cityName}"id="inputCity" class="form-control">
+                        <option th:each="cityInfo: ${cities}" th:value="${cityInfo.name}" th:text="${cityInfo.name}"/>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUnit">Unit</label>
+                    <select th:field="*{unit}" id="inputUnit" class="form-control">
+                        <option th:each="unit: ${units}" th:value="${unit.name}" th:text="${unit.name}"/>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="languageUnit">Language</label>
+                    <select th:field="*{lang}" id="languageUnit" class="form-control">
+                        <option th:each="language: ${languages}" th:value="${language.name}" th:text="${language.name}"/>
+                    </select>
+                </div>
+                <div class="col">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-bordered col-md-6">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">City</th>
+                            <th scope="col">Temperature</th>
+                            <th scope="col">Weather details</th>
+                            <th scope="col">Weather Date</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+
+                        <tr th:each="weather: ${savedWeather}">
+                            <th scope="row"><span th:text="${weather.cityInfo.name}"/></th>
+                            <th scope="row"><span th:text="${weather.temperature}"/></th>
+                            <td><span th:text="${weather.description}"/></td>
+                            <td><span th:text="${weather.weatherDate}"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
